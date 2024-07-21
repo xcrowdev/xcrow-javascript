@@ -3,6 +3,10 @@ export interface XcrowInput {
   applicationId: string;
 }
 
+type PriorityFeeLevel = 'Low' | 'Medium' | 'High' | 'VeryHigh' | 'UnsafeMax';
+type strategy = 'blockhash' | 'durable_nonce';
+type network = 'mainnet' | 'devnet';
+
 interface Token {
   mintAddress: string;
   amount: number;
@@ -10,12 +14,12 @@ interface Token {
 
 export interface DepositInput {
   payer: string;
-  strategy?: 'blockhash' | 'durable_nonce';
-  priorityFeeLevel?: 'LOW' | 'MEDIUM' | 'HIGH' | 'VERY_HIGH';
+  strategy?: strategy;
+  priorityFeeLevel?: PriorityFeeLevel;
   priorityFee?: string;
   token: Token;
   vaultId?: string;
-  network?: 'mainnet' | 'devnet';
+  network?: network;
 }
 
 export interface DepositOutput {
@@ -35,12 +39,12 @@ export interface DepositOutput {
 
 export interface WithdrawInput {
   payer: string;
-  strategy?: 'blockhash' | 'durable_nonce';
-  priorityFeeLevel?: 'LOW' | 'MEDIUM' | 'HIGH' | 'VERY_HIGH';
+  strategy?: strategy;
+  priorityFeeLevel?: PriorityFeeLevel;
   priorityFee?: string;
   token: Token;
   vaultId: string;
-  network?: 'mainnet' | 'devnet';
+  network?: network;
 }
 
 export interface WithdrawOutput {

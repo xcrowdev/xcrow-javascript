@@ -15,6 +15,7 @@ async function withdrawExample() {
     vaultId,
     payer: 'FRyeXUJWxCnBLcrdgfP1KzsCCmPWRxDmEMM31zno3LtV',
     strategy: 'blockhash',
+    priorityFeeLevel: 'Medium',
     token: {
       mintAddress: 'So11111111111111111111111111111111111111112',
       amount: 0.01,
