@@ -1,12 +1,12 @@
-import {Xcrow} from "../src";
+import { Xcrow } from '../src';
 
 describe('test', () => {
   it('should work', () => {
     const xcrow = new Xcrow({
       apiKey: 'test',
-      apiSecret: 'test',
+      applicationId: 'test',
     });
-
-    expect(true).toBe(true)
-  })
-})
+    console.log(xcrow);
+    expect(true).toBe(true);
+  });
+});
