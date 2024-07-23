@@ -8,13 +8,19 @@ import {
   XcrowInput,
 } from './contracts';
 import axios, { AxiosInstance } from 'axios';
+import {
+  InsufficientFundsError,
+  TokenNotFoundError,
+  TransactionExpiredError,
+  UnknownError,
+} from './errors';
 
 export class Xcrow {
   private api: AxiosInstance;
 
   constructor(input: XcrowInput) {
     this.api = axios.create({
-      baseURL: 'https://dev.api.xcrow.dev/v1',
+      baseURL: 'http://127.0.0.1:3334/v1',
       headers: {
         'Content-Type': 'application/json',
         'x-api-key': input.apiKey,
@@ -54,9 +60,15 @@ export class Xcrow {
           logoUri: response.data.asset.logo_uri,
         },
       };
-    } catch (e) {
-      console.log(e);
-      throw new Error('Failed to deposit');
+    } catch (e: any) {
+      if (
+        e?.response?.data?.message === 'Token not found' &&
+        e?.response?.status === 404
+      ) {
+        throw new TokenNotFoundError();
+      }
+
+      throw new UnknownError();
     }
   }
 
@@ -83,9 +95,15 @@ export class Xcrow {
         serializedTransaction: response.data.serialized_transaction,
         expiresIn: response.data.expires_in,
       };
-    } catch (e) {
-      console.log(e);
-      throw new Error('Failed to deposit');
+    } catch (e: any) {
+      if (
+        e?.response?.data?.message === 'Token not found' &&
+        e?.response?.status === 404
+      ) {
+        throw new TokenNotFoundError();
+      }
+
+      throw new UnknownError();
     }
   }
 
@@ -100,9 +118,16 @@ export class Xcrow {
       );
 
       return response.data;
-    } catch (e) {
-      console.log(e);
-      throw new Error('Failed to execute transactions');
+    } catch (e: any) {
+      if (e?.response?.data?.message === 'Insufficient funds') {
+        throw new InsufficientFundsError();
+      }
+
+      if (e?.response?.data?.message === 'Transaction expired') {
+        throw new TransactionExpiredError();
+      }
+
+      throw new UnknownError();
     }
   }
 }
