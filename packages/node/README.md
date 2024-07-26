@@ -95,7 +95,7 @@ await xcrow.execute({
 });
 ```
 
-# Withdraw
+# Errors
 
 | Error Class                | Description          |
 |----------------------------|----------------------|
