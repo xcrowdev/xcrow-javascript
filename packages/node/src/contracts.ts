@@ -16,7 +16,7 @@ export interface DepositInput {
   payer: string;
   strategy?: strategy;
   priorityFeeLevel?: PriorityFeeLevel;
-  priorityFee?: string;
+  priorityFee?: number;
   token: Token;
   vaultId?: string;
   network?: network;
@@ -41,7 +41,7 @@ export interface WithdrawInput {
   payer: string;
   strategy?: strategy;
   priorityFeeLevel?: PriorityFeeLevel;
-  priorityFee?: string;
+  priorityFee?: number;
   token: Token;
   vaultId: string;
   network?: network;
