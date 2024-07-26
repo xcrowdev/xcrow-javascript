@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://xcrow.dev" target="_blank">
-    <img src="../../docs/logo.webp" alt="Xcrow" width="280" height="200">
+    <img src="https://xcrow-media.s3.amazonaws.com/logo_black.webp" alt="Xcrow" width="280" height="200">
   </a>
 </p>
 
@@ -10,10 +10,10 @@ _Helping developers securely escrow funds on Solana through a simple, secure, an
 ## Installing
 
 ```bash
-npm install @xcrow/node
+npm install @xcrowdev/node
 
 # Or yarn
-yarn add @xcrow/node
+yarn add @xcrowdev/node
 ```
 
 ## Usage
@@ -21,7 +21,7 @@ yarn add @xcrow/node
 # Deposit
 
 ```js
-import { Xcrow } from '@xcrow/node';
+import { Xcrow } from '@xcrowdev/node';
 
 // Create a xcrow instace
 const xcrow = new Xcrow({
@@ -58,7 +58,7 @@ await xcrow.execute({
 # Withdraw
 
 ```js
-import { Xcrow } from '@xcrow/node';
+import { Xcrow } from '@xcrowdev/node';
 
 // Create a xcrow instace
 const xcrow = new Xcrow({
