@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://xcrow.dev" target="_blank">
-    <img src="docs/logo.webp" alt="Xcrow" width="280" height="200">
+    <img src="https://xcrow-media.s3.amazonaws.com/logo_black.webp" alt="Xcrow" width="280" height="200">
   </a>
 </p>
 
@@ -10,7 +10,7 @@ _Helping developers securely escrow funds on Solana through a simple, secure, an
 
 There is a npm library that can be used to interact with xcrow for each platform.
 
-- [`@xcrow/node`](https://github.com/xcrowdev/xcrow-javascript/tree/main/packages/node): Node SDK
+- [`@xcrowdev/node`](https://github.com/xcrowdev/xcrow-javascript/tree/main/packages/node): Node SDK
 
 ## Installing
 
@@ -19,44 +19,44 @@ There is a npm library that can be used to interact with xcrow for each platform
 Using npm:
 
 ```bash
-$ npm install @xcrow/node
+$ npm install @xcrowdev/node
 ```
 
 Using bower:
 
 ```bash
-$ bower install @xcrow/node
+$ bower install @xcrowdev/node
 ```
 
 Using yarn:
 
 ```bash
-$ yarn add @xcrow/node
+$ yarn add @xcrowdev/node
 ```
 
 Using pnpm:
 
 ```bash
-$ pnpm add @xcrow/node
+$ pnpm add @xcrowdev/node
 ```
 
 Once the package is installed, you can import the library using `import` or `require` approach:
 
 ```js
-import { Xcrow } from '@xcrow/node';
+import { Xcrow } from '@xcrowdev/node';
 ```
 
 If you use `require` for importing
 
 ```js
-const { Xcrow } = require('@xcrow/node');
+const { Xcrow } = require('@xcrowdev/node');
 ```
 
 
 ## Example
 
 ```js
-import { Xcrow } from '@xcrow/node';
+import { Xcrow } from '@xcrowdev/node';
 
 // Create a xcrow instace
 const xcrow = new Xcrow({
