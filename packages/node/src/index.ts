@@ -20,7 +20,7 @@ export class Xcrow {
 
   constructor(input: XcrowInput) {
     this.api = axios.create({
-      baseURL: 'http://127.0.0.1:3334/v1',
+      baseURL: 'https://dev.api.xcrow.dev/v1',
       headers: {
         'Content-Type': 'application/json',
         'x-api-key': input.apiKey,
