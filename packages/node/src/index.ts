@@ -14,6 +14,8 @@ import {
   TransactionExpiredError,
   UnknownError,
 } from './errors';
+export * from './contracts';
+export * from './errors';
 
 export class Xcrow {
   private api: AxiosInstance;
@@ -43,7 +45,7 @@ export class Xcrow {
           },
         ],
         vaultId: input.vaultId,
-        network: input.network,
+        network: input.network ?? 'mainnet',
       });
 
       return {
@@ -86,7 +88,7 @@ export class Xcrow {
           },
         ],
         vault_id: input.vaultId,
-        network: input.network,
+        network: input.network ?? 'mainnet',
       });
 
       return {
