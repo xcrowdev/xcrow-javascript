@@ -120,8 +120,6 @@ export class Xcrow {
         network: input.network ?? 'mainnet',
       });
 
-      console.log(response.data);
-
       return {
         transactionId: response.data.transaction_id,
         vaultId: response.data.vault_id,

@@ -30,6 +30,9 @@ async function refundExample() {
     signedTransaction,
   });
 
+  // Wait 10 second to ensure the vault is ready
+  await new Promise((resolve) => setTimeout(resolve, 10000));
+
   const refund = await xcrow.refund({
     vaultId: deposit.vaultId,
     network: 'devnet',
