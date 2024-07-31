@@ -54,6 +54,21 @@ export interface WithdrawOutput {
   expiresIn: string;
 }
 
+export interface RefundInput {
+  strategy?: strategy;
+  priorityFeeLevel?: PriorityFeeLevel;
+  priorityFee?: number;
+  vaultId: string;
+  network?: network;
+}
+
+export interface WithdrawOutput {
+  transactionId: string;
+  vaultId: string;
+  serializedTransaction: string;
+  expiresIn: string;
+}
+
 export interface ExecuteInput {
   vaultId: string;
   transactionId: string;

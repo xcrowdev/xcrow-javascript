@@ -3,6 +3,7 @@ import {
   DepositOutput,
   ExecuteInput,
   ExecuteOutput,
+  RefundInput,
   WithdrawInput,
   WithdrawOutput,
   XcrowInput,
@@ -90,6 +91,36 @@ export class Xcrow {
         vault_id: input.vaultId,
         network: input.network ?? 'mainnet',
       });
+
+      return {
+        transactionId: response.data.transaction_id,
+        vaultId: response.data.vault_id,
+        serializedTransaction: response.data.serialized_transaction,
+        expiresIn: response.data.expires_in,
+      };
+    } catch (e: any) {
+      if (
+        e?.response?.data?.message === 'Token not found' &&
+        e?.response?.status === 404
+      ) {
+        throw new TokenNotFoundError();
+      }
+
+      throw new UnknownError();
+    }
+  }
+
+  async refund(input: RefundInput): Promise<WithdrawOutput> {
+    try {
+      const response = await this.api.post('/transactions/refund', {
+        strategy: input.strategy,
+        priority_fee_level: input.priorityFeeLevel,
+        priority_fee: input.priorityFee,
+        vault_id: input.vaultId,
+        network: input.network ?? 'mainnet',
+      });
+
+      console.log(response.data);
 
       return {
         transactionId: response.data.transaction_id,

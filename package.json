@@ -9,7 +9,8 @@
     "test": "yarn workspaces run test",
     "lint": "eslint \"packages/**/*.ts\" --fix",
     "example:deposit": "ts-node examples/node/deposit.ts",
-    "example:withdraw": "ts-node examples/node/withdraw.ts"
+    "example:withdraw": "ts-node examples/node/withdraw.ts",
+    "example:refund": "ts-node examples/node/refund.ts"
   },
   "devDependencies": {
     "@solana/web3.js": "^1.95.1",
