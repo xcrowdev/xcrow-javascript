@@ -62,6 +62,13 @@ export interface RefundInput {
   network?: network;
 }
 
+export interface RefundOutput {
+  transactionId: string;
+  vaultId: string;
+  serializedTransaction: string;
+  expiresIn: string;
+}
+
 export interface WithdrawOutput {
   transactionId: string;
   vaultId: string;

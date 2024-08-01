@@ -4,6 +4,7 @@ import {
   ExecuteInput,
   ExecuteOutput,
   RefundInput,
+  RefundOutput,
   WithdrawInput,
   WithdrawOutput,
   XcrowInput,
@@ -23,7 +24,7 @@ export class Xcrow {
 
   constructor(input: XcrowInput) {
     this.api = axios.create({
-      baseURL: 'https://dev.api.xcrow.dev/v1',
+      baseURL: 'https://test.api.xcrow.dev/v1',
       headers: {
         'Content-Type': 'application/json',
         'x-api-key': input.apiKey,
@@ -110,7 +111,7 @@ export class Xcrow {
     }
   }
 
-  async refund(input: RefundInput): Promise<WithdrawOutput> {
+  async refund(input: RefundInput): Promise<RefundOutput> {
     try {
       const response = await this.api.post('/transactions/refund', {
         strategy: input.strategy,
