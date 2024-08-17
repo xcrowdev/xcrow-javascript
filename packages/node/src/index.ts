@@ -24,7 +24,7 @@ export class Xcrow {
 
   constructor({ apiKey, applicationId, environment = 'production' }: XcrowInput) {
     this.api = axios.create({
-      baseURL: environment === 'production' ? 'https://api.xcrow.dev/v1' : 'https://test.xcrow.dev/v1',
+      baseURL: environment === 'production' ? 'https://api.xcrow.dev/v1' : 'https://test.api.xcrow.dev/v1',
       headers: {
         'Content-Type': 'application/json',
         'x-api-key': apiKey,
