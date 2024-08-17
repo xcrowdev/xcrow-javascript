@@ -1,6 +1,7 @@
 export interface XcrowInput {
   apiKey: string;
   applicationId: string;
+  environment?: 'production' | 'test';
 }
 
 type PriorityFeeLevel = 'Low' | 'Medium' | 'High' | 'VeryHigh' | 'UnsafeMax';
