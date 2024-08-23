@@ -22,9 +22,16 @@ export * from './errors';
 export class Xcrow {
   private api: AxiosInstance;
 
-  constructor({ apiKey, applicationId, environment = 'production' }: XcrowInput) {
+  constructor({
+    apiKey,
+    applicationId,
+    environment = 'production',
+  }: XcrowInput) {
     this.api = axios.create({
-      baseURL: environment === 'production' ? 'https://api.xcrow.dev/v1' : 'https://test.api.xcrow.dev/v1',
+      baseURL:
+        environment === 'production'
+          ? 'https://api.xcrow.dev/v1'
+          : 'https://test.api.xcrow.dev/v1',
       headers: {
         'Content-Type': 'application/json',
         'x-api-key': apiKey,
@@ -46,7 +53,7 @@ export class Xcrow {
             amount: input.token.amount,
           },
         ],
-        vaultId: input.vaultId,
+        vault_id: input.vaultId,
         network: input.network ?? 'mainnet',
       });
 
