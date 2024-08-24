@@ -156,7 +156,9 @@ export class Xcrow {
         },
       );
 
-      return response.data;
+      return {
+        txHash: response.data.tx_hash,
+      };
     } catch (e: any) {
       if (e?.response?.data?.message === 'Insufficient funds') {
         throw new InsufficientFundsError();
