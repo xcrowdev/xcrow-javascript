@@ -97,9 +97,11 @@ await xcrow.execute({
 
 # Errors
 
-| Error Class                | Description          |
-|----------------------------|----------------------|
-| InsufficientFundsError     | Insufficient funds   |
-| TokenNotFoundError         | Token not found      |
-| TransactionExpiredError    | Transaction expired  |
-| UnknownError               | Unknown error        |
+| Error Class               | Description            |
+|---------------------------|------------------------|
+| InsufficientFundsError    | Insufficient funds     |
+| TokenNotFoundError        | Token not found        |
+| TransactionExpiredError   | Transaction expired    |
+| MissingApiKeyError        | Missing API key        |
+| MissingApplicationIdError | Missing application ID |
+| UnknownError              | Unknown error          |
