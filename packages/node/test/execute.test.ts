@@ -27,8 +27,7 @@ describe('Execute Xcrow', () => {
   it('Should execute transaction successfully', async () => {
     const mockResponse = {
       data: {
-        status: 'success',
-        message: 'Transaction executed',
+        tx_hash: 'txhash',
       },
     };
     axiosPostRequestMock.mockResolvedValue(mockResponse);
@@ -40,7 +39,7 @@ describe('Execute Xcrow', () => {
     };
 
     const result = await xcrow.execute(input);
-    expect(result).toEqual(mockResponse.data);
+    expect(result).toEqual({ txHash: mockResponse.data.tx_hash });
     expect(axiosPostRequestMock).toHaveBeenCalledWith(
       `/vault/${input.vaultId}/transactions`,
       expect.any(Object),

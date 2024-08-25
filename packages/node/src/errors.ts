@@ -16,6 +16,18 @@ export class TransactionExpiredError extends Error {
   }
 }
 
+export class MissingApiKeyError extends Error {
+  constructor() {
+    super('Missing API key');
+  }
+}
+
+export class MissingApplicationIdError extends Error {
+  constructor() {
+    super('Missing application ID');
+  }
+}
+
 export class UnknownError extends Error {
   constructor() {
     super('Unknown error');
