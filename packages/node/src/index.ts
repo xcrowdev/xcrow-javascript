@@ -10,12 +10,7 @@ import {
   XcrowInput,
 } from './contracts';
 import axios, { AxiosInstance } from 'axios';
-import {
-  InsufficientFundsError,
-  TokenNotFoundError,
-  TransactionExpiredError,
-  UnknownError,
-} from './errors';
+import { parseError } from './utils/parse-error';
 export * from './contracts';
 export * from './errors';
 
@@ -72,14 +67,8 @@ export class Xcrow {
         },
       };
     } catch (e: any) {
-      if (
-        e?.response?.data?.message === 'Token not found' &&
-        e?.response?.status === 404
-      ) {
-        throw new TokenNotFoundError();
-      }
-
-      throw new UnknownError();
+      parseError(e);
+      throw new Error(e);
     }
   }
 
@@ -107,14 +96,8 @@ export class Xcrow {
         expiresIn: response.data.expires_in,
       };
     } catch (e: any) {
-      if (
-        e?.response?.data?.message === 'Token not found' &&
-        e?.response?.status === 404
-      ) {
-        throw new TokenNotFoundError();
-      }
-
-      throw new UnknownError();
+      parseError(e);
+      throw new Error(e);
     }
   }
 
@@ -135,14 +118,8 @@ export class Xcrow {
         expiresIn: response.data.expires_in,
       };
     } catch (e: any) {
-      if (
-        e?.response?.data?.message === 'Token not found' &&
-        e?.response?.status === 404
-      ) {
-        throw new TokenNotFoundError();
-      }
-
-      throw new UnknownError();
+      parseError(e);
+      throw new Error(e);
     }
   }
 
@@ -160,15 +137,8 @@ export class Xcrow {
         txHash: response.data.tx_hash,
       };
     } catch (e: any) {
-      if (e?.response?.data?.message === 'Insufficient funds') {
-        throw new InsufficientFundsError();
-      }
-
-      if (e?.response?.data?.message === 'Transaction expired') {
-        throw new TransactionExpiredError();
-      }
-
-      throw new UnknownError();
+      parseError(e);
+      throw new Error(e);
     }
   }
 }

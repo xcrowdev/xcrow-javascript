@@ -1,4 +1,4 @@
-import { Xcrow } from '../src';
+import { MissingApiKeyError, MissingApplicationIdError, Xcrow } from '../src';
 import { DepositInput } from '../src/contracts';
 import { TokenNotFoundError, UnknownError } from '../src/errors';
 
@@ -70,6 +70,56 @@ describe('Deposit Xcrow', () => {
     expect(axiosPostRequestMock).toHaveBeenCalledWith(
       '/transactions/deposit',
       expect.any(Object),
+    );
+  });
+
+  it('Should throw MissingApiKeyError if not pass the api key', async () => {
+    axiosPostRequestMock.mockRejectedValue({
+      response: {
+        data: { message: 'x-api-key missing in header' },
+        status: 403,
+      },
+    });
+
+    const input: DepositInput = {
+      payer: 'payer',
+      strategy: 'blockhash',
+      priorityFeeLevel: 'Low',
+      priorityFee: 10,
+      token: {
+        mintAddress: 'mintAddress',
+        amount: 100,
+      },
+      vaultId: 'vault_1',
+      network: 'devnet',
+    };
+
+    await expect(xcrow.deposit(input)).rejects.toThrow(MissingApiKeyError);
+  });
+
+  it('Should throw MissingApplicationIdError if not pass the application id', async () => {
+    axiosPostRequestMock.mockRejectedValue({
+      response: {
+        data: { message: 'x-application-id missing in header' },
+        status: 403,
+      },
+    });
+
+    const input: DepositInput = {
+      payer: 'payer',
+      strategy: 'blockhash',
+      priorityFeeLevel: 'Low',
+      priorityFee: 10,
+      token: {
+        mintAddress: 'mintAddress',
+        amount: 100,
+      },
+      vaultId: 'vault_1',
+      network: 'devnet',
+    };
+
+    await expect(xcrow.deposit(input)).rejects.toThrow(
+      MissingApplicationIdError,
     );
   });
 
