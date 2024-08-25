@@ -1,4 +1,5 @@
 import {
+  XcrowInput,
   DepositInput,
   DepositOutput,
   ExecuteInput,
@@ -7,7 +8,6 @@ import {
   RefundOutput,
   WithdrawInput,
   WithdrawOutput,
-  XcrowInput,
 } from './contracts';
 import axios, { AxiosInstance } from 'axios';
 import { parseError } from './utils/parse-error';
