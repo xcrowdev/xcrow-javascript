@@ -22,6 +22,7 @@ async function depositExample() {
 
   const signedTransaction = await signTransaction(
     deposit.serializedTransaction,
+    process.env.PRIVATE_KEY,
   );
 
   await xcrow.execute({

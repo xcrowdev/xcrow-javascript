@@ -86,3 +86,30 @@ export interface ExecuteInput {
 export interface ExecuteOutput {
   txHash: string;
 }
+
+export interface CreateVaultInput {
+  payer: string;
+  strategy?: strategy;
+  priorityFeeLevel?: PriorityFeeLevel;
+  priorityFee?: number;
+  token: {
+    mintAddress: string;
+  };
+  network: string;
+}
+
+export interface CreateVaultOutput {
+  transactionId: string;
+  vaultId: string;
+  serializedTransaction: string;
+  expiresIn: string;
+  asset: {
+    token: string;
+    amount: number;
+    decimals: number;
+    symbol: string;
+    name: string;
+    logoUri: string;
+  };
+  tokenAccount: string;
+}

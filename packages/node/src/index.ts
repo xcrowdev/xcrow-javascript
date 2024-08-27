@@ -1,4 +1,6 @@
 import {
+  CreateVaultInput,
+  CreateVaultOutput,
   DepositInput,
   DepositOutput,
   ExecuteInput,
@@ -116,6 +118,42 @@ export class Xcrow {
         vaultId: response.data.vault_id,
         serializedTransaction: response.data.serialized_transaction,
         expiresIn: response.data.expires_in,
+      };
+    } catch (e: any) {
+      parseError(e);
+      throw new Error(e);
+    }
+  }
+
+  async createVault(input: CreateVaultInput): Promise<CreateVaultOutput> {
+    try {
+      const response = await this.api.post(`/vault`, {
+        payer: input.payer,
+        network: input.network,
+        tokens: [
+          {
+            mint_address: input.token.mintAddress,
+          },
+        ],
+        strategy: input.strategy,
+        priority_fee_level: input.priorityFeeLevel,
+        priority_fee: input.priorityFee,
+      });
+
+      return {
+        vaultId: response.data.vault_id,
+        transactionId: response.data.transaction_id,
+        serializedTransaction: response.data.serialized_transaction,
+        expiresIn: response.data.expires_in,
+        asset: {
+          token: response.data.asset.token,
+          amount: response.data.asset.amount,
+          decimals: response.data.asset.decimals,
+          symbol: response.data.asset.symbol,
+          name: response.data.asset.name,
+          logoUri: response.data.asset.logo_uri,
+        },
+        tokenAccount: response.data.tokenAccount,
       };
     } catch (e: any) {
       parseError(e);
