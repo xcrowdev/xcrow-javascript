@@ -9,6 +9,7 @@ async function multiplesDeposit() {
   const xcrow = new Xcrow({
     apiKey: process.env.API_KEY,
     applicationId: process.env.APPLICATION_ID,
+    environment: 'test',
   });
 
   const init = await xcrow.createVault({
@@ -31,6 +32,9 @@ async function multiplesDeposit() {
     transactionId: init.transactionId,
     signedTransaction,
   });
+
+  // Wait 10 second to ensure the vault is ready
+  await new Promise((resolve) => setTimeout(resolve, 10000));
 
   const deposit = await xcrow.deposit({
     payer: 'Hd1wAVXrpvpTjbK5KMYS5ZXBKAzBpST7HAQXtXXtUATj',
