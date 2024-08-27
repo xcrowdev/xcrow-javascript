@@ -29,9 +29,5 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.5.3"
   },
-  "dependencies": {
-    "@solana/signers": "^2.0.0-experimental.3331786",
-    "@solana/wallet-adapter-wallets": "^0.19.32",
-    "@solana/wallet-standard": "^1.1.2"
-  }
+  "dependencies": {}
 }
