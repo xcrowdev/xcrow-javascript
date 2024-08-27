@@ -22,6 +22,7 @@ async function refundExample() {
 
   const signedTransaction = await signTransaction(
     deposit.serializedTransaction,
+    process.env.PRIVATE_KEY,
   );
 
   await xcrow.execute({
@@ -42,6 +43,7 @@ async function refundExample() {
 
   const refundSignedTransaction = await signTransaction(
     refund.serializedTransaction,
+    process.env.PRIVATE_KEY,
   );
 
   await xcrow.execute({

@@ -25,6 +25,7 @@ async function withdrawExample() {
 
   const signedTransaction = await signTransaction(
     withdraw.serializedTransaction,
+    process.env.PRIVATE_KEY,
   );
 
   await xcrow.execute({

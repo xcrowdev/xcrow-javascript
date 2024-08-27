@@ -10,7 +10,8 @@
     "lint": "eslint \"packages/**/*.ts\" --fix",
     "example:deposit": "ts-node examples/node/deposit.ts",
     "example:withdraw": "ts-node examples/node/withdraw.ts",
-    "example:refund": "ts-node examples/node/refund.ts"
+    "example:refund": "ts-node examples/node/refund.ts",
+    "example:multiplesDeposit": "ts-node examples/node/multiplesDeposit.ts"
   },
   "devDependencies": {
     "@solana/web3.js": "^1.95.1",
@@ -27,5 +28,6 @@
     "ts-jest": "^29.2.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.3"
-  }
+  },
+  "dependencies": {}
 }
