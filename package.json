@@ -11,7 +11,8 @@
     "example:deposit": "ts-node examples/node/deposit.ts",
     "example:withdraw": "ts-node examples/node/withdraw.ts",
     "example:refund": "ts-node examples/node/refund.ts",
-    "example:multiplesDeposit": "ts-node examples/node/multiplesDeposit.ts"
+    "example:multiplesDeposit": "ts-node examples/node/multiplesDeposit.ts",
+    "example:vaultDetails": "ts-node examples/node/getVaultDetails.ts"
   },
   "devDependencies": {
     "@solana/web3.js": "^1.95.1",

@@ -5,6 +5,7 @@ import {
   DepositOutput,
   ExecuteInput,
   ExecuteOutput,
+  GetVaultDetailsOutput,
   RefundInput,
   RefundOutput,
   WithdrawInput,
@@ -173,6 +174,32 @@ export class Xcrow {
 
       return {
         txHash: response.data.tx_hash,
+      };
+    } catch (e: any) {
+      parseError(e);
+      throw new Error(e);
+    }
+  }
+
+  async getVaultDetails(vaultId: string): Promise<GetVaultDetailsOutput> {
+    try {
+      const response = await this.api.get(`/vault/${vaultId}`);
+
+      return {
+        id: response.data.id,
+        status: response.data.status,
+        signer: response.data.signer,
+        createdAt: response.data.created_at,
+        asset: {
+          id: response.data.assets[0].id,
+          token: response.data.assets[0].token,
+          amount: response.data.assets[0].amount,
+          decimals: response.data.assets[0].decimals,
+          symbol: response.data.assets[0].symbol,
+          name: response.data.assets[0].name,
+          logoUri: response.data.assets[0].logo_uri,
+          createdAt: response.data.assets[0].created_at,
+        },
       };
     } catch (e: any) {
       parseError(e);
