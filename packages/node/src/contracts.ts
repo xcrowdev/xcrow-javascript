@@ -113,3 +113,20 @@ export interface CreateVaultOutput {
   };
   tokenAccount: string;
 }
+
+export interface GetVaultDetailsOutput {
+  id: string;
+  status: string;
+  signer: string;
+  createdAt: string;
+  asset: {
+    id: string;
+    token: string;
+    amount: number;
+    decimals: number;
+    symbol: string;
+    name: string;
+    logoUri: string;
+    createdAt: string;
+  };
+}
