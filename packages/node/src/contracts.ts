@@ -123,6 +123,7 @@ export interface GetVaultDetailsOutput {
     id: string;
     token: string;
     amount: number;
+    amountParsed: number;
     decimals: number;
     symbol: string;
     name: string;

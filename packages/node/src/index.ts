@@ -194,6 +194,9 @@ export class Xcrow {
           id: response.data.assets[0].id,
           token: response.data.assets[0].token,
           amount: response.data.assets[0].amount,
+          amountParsed:
+            response.data.assets[0].amount /
+            Math.pow(10, response.data.assets[0].decimals),
           decimals: response.data.assets[0].decimals,
           symbol: response.data.assets[0].symbol,
           name: response.data.assets[0].name,
