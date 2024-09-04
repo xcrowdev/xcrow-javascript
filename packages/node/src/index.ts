@@ -53,6 +53,12 @@ export class Xcrow {
         ],
         vault_id: input.vaultId,
         network: input.network ?? 'mainnet',
+        transfer_fee: input.transferFee?.map((fee) => ({
+          signer: fee.signer,
+          receiver: fee.receiver,
+          mint_address: fee.mintAddress,
+          amount: fee.amount,
+        })),
       });
 
       return {
@@ -90,6 +96,12 @@ export class Xcrow {
         ],
         vault_id: input.vaultId,
         network: input.network ?? 'mainnet',
+        transfer_fee: input.transferFee?.map((fee) => ({
+          signer: fee.signer,
+          receiver: fee.receiver,
+          mint_address: fee.mintAddress,
+          amount: fee.amount,
+        })),
       });
 
       return {

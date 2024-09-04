@@ -21,6 +21,12 @@ export interface DepositInput {
   token: Token;
   vaultId?: string;
   network?: network;
+  transferFee?: {
+    signer: string;
+    receiver: string;
+    mintAddress: string;
+    amount: number;
+  }[];
 }
 
 export interface DepositOutput {
@@ -46,6 +52,12 @@ export interface WithdrawInput {
   token: Token;
   vaultId: string;
   network?: network;
+  transferFee?: {
+    signer: string;
+    receiver: string;
+    mintAddress: string;
+    amount: number;
+  }[];
 }
 
 export interface WithdrawOutput {
