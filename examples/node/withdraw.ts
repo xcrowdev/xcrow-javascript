@@ -9,7 +9,7 @@ async function withdrawExample() {
     applicationId: process.env.APPLICATION_ID,
   });
 
-  const vaultId = '544e69fb-b5dd-4b98-bd12-af5db0bab484';
+  const vaultId = '6f214e64-5beb-43b8-a823-e586e6bf46ee';
 
   const withdraw = await xcrow.withdraw({
     vaultId,
@@ -17,10 +17,13 @@ async function withdrawExample() {
     strategy: 'blockhash',
     priorityFeeLevel: 'Medium',
     token: {
-      mintAddress: 'So11111111111111111111111111111111111111112',
+      mintAddress: '85VBFQZC9TZkfaptBWjvUw7YbZjy52A6mjtPGjstQAmQ',
       amount: 0.01,
+      logoUri: 'https://wormhole.com/token.png',
+      symbol: 'W',
+      decimals: 6,
+      name: 'Wormhole Token',
     },
-    network: 'devnet',
   });
 
   const signedTransaction = await signTransaction(

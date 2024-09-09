@@ -33,3 +33,16 @@ export class UnknownError extends Error {
     super('Unknown error');
   }
 }
+
+export class ValidationError extends Error {
+  constructor(errors: any) {
+    super();
+    this.name = 'ValidationError';
+    this.message = errors
+      .map((error: any) => {
+        const path = error.path.join('.');
+        return `Error in "${path}": ${error.message}`;
+      })
+      .join('\n');
+  }
+}

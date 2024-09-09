@@ -14,6 +14,20 @@ import {
 } from './contracts';
 import axios, { AxiosInstance } from 'axios';
 import { parseError } from './utils/parse-error';
+import {
+  buildDepositRequestPayload,
+  buildDepositResponsePayload,
+  buildWithdrawRequestPayload,
+  buildWithdrawResponsePayload,
+  createVaultRequestPayload,
+  createVaultResponsePayload,
+  getVaultDetailsResponsePayload,
+  refundRequestPayload,
+  refundResponsePayload,
+} from './utils/build-payloads';
+import { DepositSchema } from './validations/deposit-validation';
+import { ValidationError } from './errors';
+import { WithdrawSchema } from './validations/withdraw-validation';
 export * from './contracts';
 export * from './errors';
 
@@ -39,77 +53,38 @@ export class Xcrow {
   }
 
   async deposit(input: DepositInput): Promise<DepositOutput> {
-    try {
-      const response = await this.api.post('/transactions/deposit', {
-        payer: input.payer,
-        strategy: input.strategy,
-        priority_fee_level: input.priorityFeeLevel,
-        priority_fee: input.priorityFee,
-        tokens: [
-          {
-            mint_address: input.token.mintAddress,
-            amount: input.token.amount,
-          },
-        ],
-        vault_id: input.vaultId,
-        network: input.network ?? 'mainnet',
-        transfer_fee: input.transferFee?.map((fee) => ({
-          signer: fee.signer,
-          receiver: fee.receiver,
-          mint_address: fee.mintAddress,
-          amount: fee.amount,
-        })),
-      });
+    const result = DepositSchema.safeParse(input);
+    if (!result.success) {
+      throw new ValidationError(result.error.errors);
+    }
 
-      return {
-        transactionId: response.data.transaction_id,
-        vaultId: response.data.vault_id,
-        serializedTransaction: response.data.serialized_transaction,
-        expiresIn: response.data.expires_in,
-        asset: {
-          token: response.data.asset.token,
-          amount: response.data.asset.amount,
-          decimals: response.data.asset.decimals,
-          symbol: response.data.asset.symbol,
-          name: response.data.asset.name,
-          logoUri: response.data.asset.logo_uri,
-        },
-      };
+    try {
+      const response = await this.api.post(
+        '/transactions/deposit',
+        buildDepositRequestPayload(input),
+      );
+
+      return buildDepositResponsePayload(response);
     } catch (e: any) {
+      console.log(e);
       parseError(e);
       throw new Error(e);
     }
   }
 
   async withdraw(input: WithdrawInput): Promise<WithdrawOutput> {
-    try {
-      const response = await this.api.post('/transactions/withdraw', {
-        payer: input.payer,
-        strategy: input.strategy,
-        priority_fee_level: input.priorityFeeLevel,
-        priority_fee: input.priorityFee,
-        tokens: [
-          {
-            mint_address: input.token.mintAddress,
-            amount: input.token.amount,
-          },
-        ],
-        vault_id: input.vaultId,
-        network: input.network ?? 'mainnet',
-        transfer_fee: input.transferFee?.map((fee) => ({
-          signer: fee.signer,
-          receiver: fee.receiver,
-          mint_address: fee.mintAddress,
-          amount: fee.amount,
-        })),
-      });
+    const result = WithdrawSchema.safeParse(input);
+    if (!result.success) {
+      throw new ValidationError(result.error.errors);
+    }
 
-      return {
-        transactionId: response.data.transaction_id,
-        vaultId: response.data.vault_id,
-        serializedTransaction: response.data.serialized_transaction,
-        expiresIn: response.data.expires_in,
-      };
+    try {
+      const response = await this.api.post(
+        '/transactions/withdraw',
+        buildWithdrawRequestPayload(input),
+      );
+
+      return buildWithdrawResponsePayload(response);
     } catch (e: any) {
       parseError(e);
       throw new Error(e);
@@ -118,20 +93,12 @@ export class Xcrow {
 
   async refund(input: RefundInput): Promise<RefundOutput> {
     try {
-      const response = await this.api.post('/transactions/refund', {
-        strategy: input.strategy,
-        priority_fee_level: input.priorityFeeLevel,
-        priority_fee: input.priorityFee,
-        vault_id: input.vaultId,
-        network: input.network ?? 'mainnet',
-      });
+      const response = await this.api.post(
+        '/transactions/refund',
+        refundRequestPayload(input),
+      );
 
-      return {
-        transactionId: response.data.transaction_id,
-        vaultId: response.data.vault_id,
-        serializedTransaction: response.data.serialized_transaction,
-        expiresIn: response.data.expires_in,
-      };
+      return refundResponsePayload(response);
     } catch (e: any) {
       parseError(e);
       throw new Error(e);
@@ -140,34 +107,12 @@ export class Xcrow {
 
   async createVault(input: CreateVaultInput): Promise<CreateVaultOutput> {
     try {
-      const response = await this.api.post(`/vault`, {
-        payer: input.payer,
-        network: input.network,
-        tokens: [
-          {
-            mint_address: input.token.mintAddress,
-          },
-        ],
-        strategy: input.strategy,
-        priority_fee_level: input.priorityFeeLevel,
-        priority_fee: input.priorityFee,
-      });
+      const response = await this.api.post(
+        `/vault`,
+        createVaultRequestPayload(input),
+      );
 
-      return {
-        vaultId: response.data.vault_id,
-        transactionId: response.data.transaction_id,
-        serializedTransaction: response.data.serialized_transaction,
-        expiresIn: response.data.expires_in,
-        asset: {
-          token: response.data.asset.token,
-          amount: response.data.asset.amount,
-          decimals: response.data.asset.decimals,
-          symbol: response.data.asset.symbol,
-          name: response.data.asset.name,
-          logoUri: response.data.asset.logo_uri,
-        },
-        tokenAccount: response.data.tokenAccount,
-      };
+      return createVaultResponsePayload(response);
     } catch (e: any) {
       parseError(e);
       throw new Error(e);
@@ -197,25 +142,7 @@ export class Xcrow {
     try {
       const response = await this.api.get(`/vault/${vaultId}`);
 
-      return {
-        id: response.data.id,
-        status: response.data.status,
-        signer: response.data.signer,
-        createdAt: response.data.created_at,
-        asset: {
-          id: response.data.assets[0].id,
-          token: response.data.assets[0].token,
-          amount: response.data.assets[0].amount,
-          amountParsed:
-            response.data.assets[0].amount /
-            Math.pow(10, response.data.assets[0].decimals),
-          decimals: response.data.assets[0].decimals,
-          symbol: response.data.assets[0].symbol,
-          name: response.data.assets[0].name,
-          logoUri: response.data.assets[0].logo_uri,
-          createdAt: response.data.assets[0].created_at,
-        },
-      };
+      return getVaultDetailsResponsePayload(response);
     } catch (e: any) {
       parseError(e);
       throw new Error(e);
