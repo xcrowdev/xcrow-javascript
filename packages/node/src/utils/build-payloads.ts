@@ -46,6 +46,7 @@ export function buildDepositResponsePayload(response: any) {
       name: response.data.asset.name,
       logoUri: response.data.asset.logo_uri,
     },
+    tokenAccount: response.data.token_account,
   };
 }
 
@@ -133,7 +134,7 @@ export function createVaultResponsePayload(response: any) {
       name: response.data.asset.name,
       logoUri: response.data.asset.logo_uri,
     },
-    tokenAccount: response.data.tokenAccount,
+    tokenAccount: response.data.token_account,
   };
 }
 

@@ -46,6 +46,7 @@ export interface DepositOutput {
     name: string;
     logoUri: string;
   };
+  tokenAccount: string;
 }
 
 export interface WithdrawInput {
