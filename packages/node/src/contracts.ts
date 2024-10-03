@@ -11,6 +11,10 @@ type network = 'mainnet' | 'devnet';
 interface Token {
   mintAddress: string;
   amount: number;
+  decimals?: number;
+  symbol?: string;
+  name?: string;
+  logoUri?: string;
 }
 
 export interface DepositInput {
@@ -42,6 +46,7 @@ export interface DepositOutput {
     name: string;
     logoUri: string;
   };
+  tokenAccount: string;
 }
 
 export interface WithdrawInput {
