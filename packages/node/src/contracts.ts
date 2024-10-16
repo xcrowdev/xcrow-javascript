@@ -30,6 +30,7 @@ export interface DepositInput {
     receiver: string;
     mintAddress: string;
     amount: number;
+    decimals: number;
   }[];
 }
 
@@ -62,6 +63,7 @@ export interface WithdrawInput {
     receiver: string;
     mintAddress: string;
     amount: number;
+    decimals: number;
   }[];
 }
 

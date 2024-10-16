@@ -28,6 +28,7 @@ export function buildDepositRequestPayload(input: DepositInput) {
       receiver: fee.receiver,
       mint_address: fee.mintAddress,
       amount: fee.amount,
+      decimals: fee.decimals,
     })),
   };
 }
@@ -73,6 +74,7 @@ export function buildWithdrawRequestPayload(input: WithdrawInput) {
       receiver: fee.receiver,
       mint_address: fee.mintAddress,
       amount: fee.amount,
+      decimals: fee.decimals,
     })),
   };
 }
