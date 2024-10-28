@@ -66,7 +66,6 @@ export class Xcrow {
 
       return buildDepositResponsePayload(response);
     } catch (e: any) {
-      console.log(e);
       parseError(e);
       throw new Error(e);
     }

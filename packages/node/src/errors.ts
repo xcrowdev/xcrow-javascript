@@ -28,6 +28,12 @@ export class MissingApplicationIdError extends Error {
   }
 }
 
+export class FeeHigherThanMaxPriorityFeeError extends Error {
+  constructor() {
+    super('Fee higher than max priority fee');
+  }
+}
+
 export class UnknownError extends Error {
   constructor() {
     super('Unknown error');

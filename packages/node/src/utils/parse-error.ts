@@ -1,4 +1,5 @@
 import {
+  FeeHigherThanMaxPriorityFeeError,
   InsufficientFundsError,
   MissingApiKeyError,
   MissingApplicationIdError,
@@ -22,6 +23,10 @@ export function parseError(error: any) {
     throw new MissingApiKeyError();
   } else if (errorMessage === 'x-application-id missing in header') {
     throw new MissingApplicationIdError();
+  } else if (
+    errorMessage === 'Transaction fee is higher than max priority fee'
+  ) {
+    throw new FeeHigherThanMaxPriorityFeeError();
   }
 
   throw new UnknownError();

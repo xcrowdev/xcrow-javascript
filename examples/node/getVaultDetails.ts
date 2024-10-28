@@ -6,10 +6,11 @@ async function getVaultDetails() {
   const xcrow = new Xcrow({
     apiKey: process.env.API_KEY,
     applicationId: process.env.APPLICATION_ID,
+    environment: 'test',
   });
 
   const vault = await xcrow.getVaultDetails(
-    '24977311-156a-4928-88a7-7006d91d1aa1',
+    '7a4ac28b-ded1-4cca-9c2a-0c91f8a8371e',
   );
   console.log(vault);
 }

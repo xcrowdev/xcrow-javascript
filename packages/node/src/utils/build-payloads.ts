@@ -11,6 +11,7 @@ export function buildDepositRequestPayload(input: DepositInput) {
     strategy: input.strategy,
     priority_fee_level: input.priorityFeeLevel,
     priority_fee: input.priorityFee,
+    max_priority_fee: input.maxPriorityFee,
     tokens: [
       {
         mint_address: input.token.mintAddress,
@@ -57,6 +58,7 @@ export function buildWithdrawRequestPayload(input: WithdrawInput) {
     strategy: input.strategy,
     priority_fee_level: input.priorityFeeLevel,
     priority_fee: input.priorityFee,
+    max_priority_fee: input.maxPriorityFee,
     tokens: [
       {
         mint_address: input.token.mintAddress,
@@ -93,6 +95,7 @@ export function refundRequestPayload(input: RefundInput) {
     strategy: input.strategy,
     priority_fee_level: input.priorityFeeLevel,
     priority_fee: input.priorityFee,
+    max_priority_fee: input.maxPriorityFee,
     vault_id: input.vaultId,
     network: input.network ?? 'mainnet',
   };
@@ -119,6 +122,7 @@ export function createVaultRequestPayload(input: CreateVaultInput) {
     strategy: input.strategy,
     priority_fee_level: input.priorityFeeLevel,
     priority_fee: input.priorityFee,
+    max_priority_fee: input.maxPriorityFee,
   };
 }
 

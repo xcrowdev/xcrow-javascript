@@ -61,6 +61,10 @@ export const WithdrawSchema = z.object({
   strategy: Strategy.optional(),
   priorityFeeLevel: PriorityFeeLevel.optional(),
   priorityFee: z.number().positive('Priority fee must be positive').optional(),
+  maxPriorityFee: z
+    .number()
+    .positive('Maximum fee must be positive')
+    .optional(),
   token: withdrawToken,
   vaultId: z.string(),
   network: Network.optional(),
