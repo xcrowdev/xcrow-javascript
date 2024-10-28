@@ -22,6 +22,7 @@ export interface DepositInput {
   strategy?: strategy;
   priorityFeeLevel?: PriorityFeeLevel;
   priorityFee?: number;
+  maxPriorityFee?: number;
   token: Token;
   vaultId?: string;
   network?: network;
@@ -55,6 +56,7 @@ export interface WithdrawInput {
   strategy?: strategy;
   priorityFeeLevel?: PriorityFeeLevel;
   priorityFee?: number;
+  maxPriorityFee?: number;
   token: Token;
   vaultId: string;
   network?: network;
@@ -78,6 +80,7 @@ export interface RefundInput {
   strategy?: strategy;
   priorityFeeLevel?: PriorityFeeLevel;
   priorityFee?: number;
+  maxPriorityFee?: number;
   vaultId: string;
   network?: network;
 }
@@ -111,6 +114,7 @@ export interface CreateVaultInput {
   strategy?: strategy;
   priorityFeeLevel?: PriorityFeeLevel;
   priorityFee?: number;
+  maxPriorityFee?: number;
   token: {
     mintAddress: string;
   };

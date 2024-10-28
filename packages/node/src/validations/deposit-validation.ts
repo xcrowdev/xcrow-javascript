@@ -61,6 +61,10 @@ export const DepositSchema = z.object({
   strategy: Strategy.optional(),
   priorityFeeLevel: PriorityFeeLevel.optional(),
   priorityFee: z.number().positive('Priority fee must be positive').optional(),
+  maxPriorityFee: z
+    .number()
+    .positive('Maximum fee must be positive')
+    .optional(),
   token: DepositToken,
   vaultId: z.string().optional(),
   network: Network.optional(),
