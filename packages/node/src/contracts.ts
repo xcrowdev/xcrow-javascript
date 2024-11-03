@@ -40,6 +40,10 @@ export interface DepositOutput {
   vaultId: string;
   serializedTransaction: string;
   expiresIn: string;
+  fees: {
+    priorityFee: number;
+    transactionFee: number;
+  };
   asset: {
     token: string;
     amount: number;
@@ -74,6 +78,10 @@ export interface WithdrawOutput {
   vaultId: string;
   serializedTransaction: string;
   expiresIn: string;
+  fees: {
+    priorityFee: number | null;
+    transactionFee: number;
+  };
 }
 
 export interface RefundInput {
@@ -90,6 +98,10 @@ export interface RefundOutput {
   vaultId: string;
   serializedTransaction: string;
   expiresIn: string;
+  fees: {
+    priorityFee: number | null;
+    transactionFee: number;
+  };
 }
 
 export interface WithdrawOutput {

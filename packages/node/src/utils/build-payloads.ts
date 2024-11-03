@@ -40,6 +40,10 @@ export function buildDepositResponsePayload(response: any) {
     vaultId: response.data.vault_id,
     serializedTransaction: response.data.serialized_transaction,
     expiresIn: response.data.expires_in,
+    fees: {
+      priorityFee: response.data.fees.priority_fee / Math.pow(10, 9),
+      transactionFee: response.data.fees.transaction_fee / Math.pow(10, 9),
+    },
     asset: {
       token: response.data.asset.token,
       amount: response.data.asset.amount,
@@ -87,6 +91,10 @@ export function buildWithdrawResponsePayload(response: any) {
     vaultId: response.data.vault_id,
     serializedTransaction: response.data.serialized_transaction,
     expiresIn: response.data.expires_in,
+    fees: {
+      priorityFee: response.data.fees.priority_fee / Math.pow(10, 9),
+      transactionFee: response.data.fees.transaction_fee / Math.pow(10, 9),
+    },
   };
 }
 
@@ -107,6 +115,10 @@ export function refundResponsePayload(response: any) {
     vaultId: response.data.vault_id,
     serializedTransaction: response.data.serialized_transaction,
     expiresIn: response.data.expires_in,
+    fees: {
+      priorityFee: null,
+      transactionFee: response.data.fees.transaction_fee / Math.pow(10, 9),
+    },
   };
 }
 
