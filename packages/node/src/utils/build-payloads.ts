@@ -129,6 +129,10 @@ export function createVaultRequestPayload(input: CreateVaultInput) {
     tokens: [
       {
         mint_address: input.token.mintAddress,
+        decimals: input.token.decimals,
+        symbol: input.token.symbol,
+        name: input.token.name,
+        logo_uri: input.token.logoUri,
       },
     ],
     strategy: input.strategy,
