@@ -28,6 +28,7 @@ import {
 import { DepositSchema } from './validations/deposit-validation';
 import { ValidationError } from './errors';
 import { WithdrawSchema } from './validations/withdraw-validation';
+import { CreateVaultValidation } from './validations/create-vault-validation';
 export * from './contracts';
 export * from './errors';
 
@@ -105,6 +106,11 @@ export class Xcrow {
   }
 
   async createVault(input: CreateVaultInput): Promise<CreateVaultOutput> {
+    const result = CreateVaultValidation.safeParse(input);
+    if (!result.success) {
+      throw new ValidationError(result.error.errors);
+    }
+
     try {
       const response = await this.api.post(
         `/vault`,

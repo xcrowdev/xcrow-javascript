@@ -129,6 +129,10 @@ export interface CreateVaultInput {
   maxPriorityFee?: number;
   token: {
     mintAddress: string;
+    decimals?: number;
+    symbol?: string;
+    name?: string;
+    logoUri?: string;
   };
   network: string;
 }
