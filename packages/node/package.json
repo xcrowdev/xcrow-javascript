@@ -1,6 +1,6 @@
 {
   "name": "@xcrowdev/node",
-  "version": "1.9.0",
+  "version": "1.9.1-beta",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",

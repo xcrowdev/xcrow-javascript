@@ -166,6 +166,7 @@ export function getVaultDetailsResponsePayload(response: any) {
     status: response.data.status,
     signer: response.data.signer,
     createdAt: response.data.created_at,
+    tokenAccount: response.data.token_account,
     asset: {
       id: response.data.assets[0].id,
       token: response.data.assets[0].token,
