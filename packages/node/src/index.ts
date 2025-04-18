@@ -43,7 +43,7 @@ export class Xcrow {
     this.api = axios.create({
       baseURL:
         environment === 'production'
-          ? 'https://api.xcrow.dev/v1'
+          ? 'https://api2.xcrow.dev/v1'
           : 'https://test.api.xcrow.dev/v1',
       headers: {
         'Content-Type': 'application/json',
