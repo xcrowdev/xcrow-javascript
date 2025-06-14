@@ -139,6 +139,13 @@ export function createVaultRequestPayload(input: CreateVaultInput) {
     priority_fee_level: input.priorityFeeLevel,
     priority_fee: input.priorityFee,
     max_priority_fee: input.maxPriorityFee,
+    transfer_fee: input.transferFee?.map((fee) => ({
+      signer: fee.signer,
+      receiver: fee.receiver,
+      mint_address: fee.mintAddress,
+      amount: fee.amount,
+      decimals: fee.decimals,
+    })),
   };
 }
 

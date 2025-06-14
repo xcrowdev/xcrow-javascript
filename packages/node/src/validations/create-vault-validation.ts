@@ -11,6 +11,14 @@ const PriorityFeeLevel = z.enum([
 ]);
 const Network = z.enum(['mainnet', 'devnet']);
 
+const TransferFee = z.object({
+  signer: z.string().min(1, 'Signer is required'),
+  receiver: z.string().min(1, 'Receiver is required'),
+  mintAddress: z.string().min(1, 'Mint address is required'),
+  amount: z.number().positive('Amount must be positive'),
+  decimals: z.number().int().nonnegative('Decimals must be non-negative'),
+});
+
 const defaultTokenAddresses = [
   'F7Hwf8ib5DVCoiuyGr618Y3gon429Rnd1r5F9R5upump',
   'So11111111111111111111111111111111111111112',
@@ -59,4 +67,5 @@ export const CreateVaultValidation = z.object({
     .optional(),
   token: createVaultToken,
   network: Network.optional(),
+  transferFee: z.array(TransferFee).optional(),
 });
