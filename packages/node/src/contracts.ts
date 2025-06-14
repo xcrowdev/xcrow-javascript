@@ -135,6 +135,13 @@ export interface CreateVaultInput {
     logoUri?: string;
   };
   network: string;
+  transferFee?: {
+    signer: string;
+    receiver: string;
+    mintAddress: string;
+    amount: number;
+    decimals: number;
+  }[];
 }
 
 export interface CreateVaultOutput {
