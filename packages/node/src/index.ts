@@ -8,6 +8,8 @@ import {
   GetVaultDetailsOutput,
   RefundInput,
   RefundOutput,
+  BurnInput,
+  BurnOutput,
   WithdrawInput,
   WithdrawOutput,
   XcrowInput,
@@ -24,11 +26,14 @@ import {
   getVaultDetailsResponsePayload,
   refundRequestPayload,
   refundResponsePayload,
+  burnRequestPayload,
+  burnResponsePayload,
 } from './utils/build-payloads';
 import { DepositSchema } from './validations/deposit-validation';
 import { ValidationError } from './errors';
 import { WithdrawSchema } from './validations/withdraw-validation';
 import { CreateVaultValidation } from './validations/create-vault-validation';
+import { BurnSchema } from './validations/burn-validation';
 export * from './contracts';
 export * from './errors';
 
@@ -99,6 +104,25 @@ export class Xcrow {
       );
 
       return refundResponsePayload(response);
+    } catch (e: any) {
+      parseError(e);
+      throw new Error(e);
+    }
+  }
+
+  async burn(input: BurnInput): Promise<BurnOutput> {
+    const result = BurnSchema.safeParse(input);
+    if (!result.success) {
+      throw new ValidationError(result.error.errors);
+    }
+
+    try {
+      const response = await this.api.post(
+        '/transactions/burn',
+        burnRequestPayload(input),
+      );
+
+      return burnResponsePayload(response);
     } catch (e: any) {
       parseError(e);
       throw new Error(e);

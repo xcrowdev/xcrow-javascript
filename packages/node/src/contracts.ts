@@ -104,11 +104,25 @@ export interface RefundOutput {
   };
 }
 
-export interface WithdrawOutput {
+export interface BurnInput {
+  strategy?: strategy;
+  priorityFeeLevel?: PriorityFeeLevel;
+  priorityFee?: number;
+  maxPriorityFee?: number;
+  vaultId: string;
+  network?: network;
+}
+
+export interface BurnOutput {
   transactionId: string;
   vaultId: string;
   serializedTransaction: string;
   expiresIn: string;
+  tokenAccount: string;
+  fees: {
+    priorityFee: number | null;
+    transactionFee: number;
+  };
 }
 
 export interface ExecuteInput {
