@@ -2,6 +2,7 @@ import {
   CreateVaultInput,
   DepositInput,
   RefundInput,
+  BurnInput,
   WithdrawInput,
 } from '../contracts';
 
@@ -115,6 +116,31 @@ export function refundResponsePayload(response: any) {
     vaultId: response.data.vault_id,
     serializedTransaction: response.data.serialized_transaction,
     expiresIn: response.data.expires_in,
+    fees: {
+      priorityFee: null,
+      transactionFee: response.data.fees.transaction_fee / Math.pow(10, 9),
+    },
+  };
+}
+
+export function burnRequestPayload(input: BurnInput) {
+  return {
+    strategy: input.strategy,
+    priority_fee_level: input.priorityFeeLevel,
+    priority_fee: input.priorityFee,
+    max_priority_fee: input.maxPriorityFee,
+    vault_id: input.vaultId,
+    network: input.network ?? 'mainnet',
+  };
+}
+
+export function burnResponsePayload(response: any) {
+  return {
+    transactionId: response.data.transaction_id,
+    vaultId: response.data.vault_id,
+    serializedTransaction: response.data.serialized_transaction,
+    expiresIn: response.data.expires_in,
+    tokenAccount: response.data.token_account,
     fees: {
       priorityFee: null,
       transactionFee: response.data.fees.transaction_fee / Math.pow(10, 9),
